@@ -1,0 +1,12 @@
+**********training**********
+[Epoch  1/10] [loss: 3.116844]
+[Epoch  2/10] [loss: 2.584244]
+[Epoch  3/10] [loss: 2.255892]
+[Epoch  4/10] [loss: 2.028675]
+[Epoch  5/10] [loss: 1.822972]
+[Epoch  6/10] [loss: 1.715369]
+[Epoch  7/10] [loss: 1.708850]
+[Epoch  8/10] [loss: 1.691859]
+[Epoch  9/10] [loss: 1.687006]
+[Epoch 10/10] [loss: 1.662941]
+**********detecting**********

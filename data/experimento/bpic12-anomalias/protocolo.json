@@ -1,0 +1,13 @@
+{
+  "input": "/home/vanderleia/leia/PROJETO_ANOMALIAS_REAL_E_SINTETICO/data/real/BPI_Challenge_2012.xes.gz",
+  "n_cases": 1000,
+  "n_modified": 200,
+  "seed": 42,
+  "rate": 0.2,
+  "types": {
+    "omissao": 50,
+    "repeticao": 50,
+    "troca": 50,
+    "atividade_desconhecida": 50
+  }
+}

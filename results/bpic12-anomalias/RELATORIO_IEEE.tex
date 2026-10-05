@@ -1,0 +1,115 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs,amsmath,url}
+\title{Detecção de Anomalias em Logs de Eventos: Modelo Sintético da Disciplina e Dados Reais Utilizados em X-Processes}
+\author{\IEEEauthorblockN{Vanderleia Matos Costa e colaboradores}\\\IEEEauthorblockA{SIN5025 --- Mineração de Processos\\Universidade de São Paulo}}
+\begin{document}
+\maketitle
+\begin{abstract}
+Estudam-se anomalias em duas fontes distintas: uma amostra de 500 casos do log sintético gerado no BIMP a partir do modelo XML da disciplina e o conjunto observacional BPIC12, utilizado pelos autores de X-Processes. No sintético, 25 casos da amostra foram modificados; raridade\_transicoes: F1 0,920. Para o experimento real, 1000 casos foram escolhidos e 200 foram modificados artificialmente (20\%). Os resultados desta edição são lidos dos arquivos summary.json após cada execução. Apenas métodos concluídos recebem métricas; falhas e ausências aparecem no estado da execução. O BPI possui casos reais, mas os rótulos deste experimento indicam modificações controladas, e não anomalias naturais comprovadas.
+\end{abstract}
+\begin{IEEEkeywords}mineração de processos, detecção de anomalias, XES, dados reais, simulação\end{IEEEkeywords}
+\section{Introdução}
+Um log de eventos reúne atividades, instante e identificador de caso. Uma sequência cronológica de atividades é um trace. A qualidade dos registros importa para descobrir processos, comparar comportamentos e investigar exceções. Um caso incomum não é necessariamente incorreto: escolhas válidas, paralelismo e mudanças do processo podem gerar sequências raras \cite{vanderaalst2016process,vanderaalstcarmona2022handbook}.
+
+O objetivo é explicar o que se chama anomalia, quais desvios podem ser detectados e tratados e como comparar resultados em fontes sintética e observacional. Os autores Fantinato, Peres e Reijers aplicaram X-Processes a 12 logs reais para descobrir modelos \cite{fantinato2023xprocesses}; aqui se estuda detecção de alterações em um dos mesmos conjuntos, BPIC12. Não são reproduzidos os resultados de qualidade de descoberta como se fossem métricas de anomalias.
+
+\section{Definição e identificação}
+Seja $\sigma=\langle a_1,\ldots,a_m\rangle$ um trace. Neste experimento rotulado, anomalia significa uma edição deliberada em uma cópia de $\sigma$, com tipo e identificador registrados. Essa definição operacional permite medir acerto comparando a observação com a cópia anterior. Em produção, atividade rara, atividade inexistente, repetição indevida, omissão e troca de ordem são apenas indícios; confirmar anomalia requer conhecer regras, exceções e contexto \cite{suriadi2017patterns}.
+
+\subsection{Estratégias de detecção}
+Modelos normativos e verificações de conformidade permitem confrontar o trace com comportamento permitido; escores de raridade de transições comparam pares consecutivos; LOF estima densidade relativa; Isolation Forest procura casos isolados; redes neurais podem aprender representações de eventos. Um limiar ou orçamento de alertas converte ranking em suspeitas. O BPMN do experimento sintético serve à simulação, sem ser inserido como rótulo no método estatístico \cite{breunig2000lof,liu2008isolation}.
+
+\clearpage
+\section{Quais anomalias podem ser tratadas?}
+Omissão de atividade, repetição de registro, permuta de atividades e inserção de atividade desconhecida são alterações estruturais controláveis por edição da sequência. Também existem desvios de tempo, recurso, atributo de dado e relação entre objetos: como o programa desta experiência utiliza somente atividades por caso, não se deve alegar que essas últimas categorias foram medidas. Campos de tempo e recurso podem ser analisados em trabalhos posteriores.
+
+Há alternativas de tratamento: preservar e encaminhar à revisão, corrigir um erro confirmado, adicionar evento faltante com evidência externa, remover duplicata comprovada, normalizar códigos de atividade, ou atualizar o modelo se o comportamento raro for legítimo. Uma sugestão de reparo baseada em protótipos observados não equivale à restauração comprovada sem comparação com referência limpa. Deve-se registrar original, justificativa, edição e responsável \cite{weske2024bpm,suriadi2017patterns}.
+
+\section{Dados sintéticos da professora}
+A professora Sarajane Marques Peres disponibilizou ``Modelo de processo (fonte / XML genérico) --- Para ser usado no simulador''. A visualização no Bizagi Modeler mostrou 26 atividades de A até Z, decisões XOR, ramificações paralelas, reconvergências, um retorno de fluxo e mais de uma possibilidade de término. A versão BPMN exportada acompanha o projeto sintético. O modelo não foi substituído por um fluxo próprio mais simples.
+
+Após configurar o processo no BIMP, incluindo durações, recursos e probabilidades das saídas XOR, foram gerados 5.000 casos em MXML compactado. Preservou-se o log limpo e, em uma cópia, um script Python modificou 250 casos (5\%), com semente 2026. O projeto extrai uma amostra controlada de 500 desses casos: 25 rotulados como alterados e 475 não alterados, mantendo os mesmos IDs nos arquivos limpo e anômalo. Os tipos foram inserção final de A, omissão de A, repetição de A e substituição de A por Z. Os rótulos são externos ao arquivo pontuado. Não se infere do log a configuração exata de todas as probabilidades usadas no simulador.
+
+\section{Resultado sintético registrado}
+O código calcula escores e confronta alertas com o arquivo externo de rótulos da amostra. A Tabela I é atualizada depois da execução sintética. São comparados 500 casos, sendo 25 alterados; uma tabela vazia significa que ainda não há execução concluída, e não que o resultado seja zero. Os arquivos de caso preservam a pontuação e a decisão para auditoria. \begin{table}[t]\centering\caption{Resultados da amostra sintética de 500 casos}\begin{tabular}{lrrr}\toprule Método & P & R & F1\\\midrule raridade\_transicoes & 0,920 & 0,920 & 0,920 \\ \bottomrule\end{tabular}\end{table}
+
+\clearpage
+\section{Origem dos dados reais}
+O BPIC12, do BPI Challenge 2012, é um log observacional de solicitações de empréstimo disponibilizado por van Dongen no repositório 4TU \cite{vandongen2012bpi}. A Tabela 6 do artigo X-Processes \cite{fantinato2023xprocesses} inclui BPIC12 entre os 12 logs de referência e reporta 13.087 casos, 262.200 eventos, 24 atividades e 4.366 variantes; o arquivo XES.GZ incluído neste projeto tem esses totais. O repositório X-Processes também contém um arquivo denominado test.xes.gz; esse arquivo menor não é o BPIC12 usado aqui. A coincidência de nome e estatísticas identifica o conjunto de origem; a contribuição experimental desta pesquisa é uma tarefa nova de detecção.
+
+\section{Protocolo XES e prevenção de vazamento}
+O comando preparar\_xes.py lê o XES original sem modificá-lo, seleciona casos elegíveis de forma determinística e grava uma amostra limpa em XES.GZ. Sua cópia modificada recebe uma das quatro operações: omissão de evento interno, repetição de evento, troca dos nomes das duas primeiras atividades e inserção de atividade \texttt{\_\_UNKNOWN\_\_}. A tabela externa identifica os casos alterados e preserva suas sequências antes/depois. Nessa execução: 1000 casos, 200 modificações, taxa 20\%, distribuição omissao: 50, repeticao: 50, troca: 50, atividade\_desconhecida: 50.
+
+O importador converte o XES alterado para a estrutura esperada pelos 14 métodos BPAD, em que todos os exemplos são marcados como normais na entrada. O arquivo de referência é aberto pelo programa apenas para avaliar pontuações e sugestões. O protocolo compara traces reais aos mesmos traces após ruído artificial. A organização original não forneceu uma lista de anomalias naturais para esses casos, logo métricas de precisão e F1 não devem ser interpretadas como validação de fraude ou irregularidade real.
+
+\section{Métricas e reparação}
+Após fixar o orçamento de alertas, $P=TP/(TP+FP)$, $R=TP/(TP+FN)$ e $F_1=2PR/(P+R)$. AP e AUC-ROC avaliam a ordenação por escore. Uma correção proposta pode ser contada como exata apenas se igualar a cópia limpa do trace, evento por evento na perspectiva escolhida; a contagem de sugestões aplicadas, por si só, não comprova recuperação. O erro do método deve permanecer visível quando ocorrer.
+
+\clearpage
+\section{Resultados gerados para o log real}
+\begin{table}[t]\centering\caption{Experimento real anterior: quatro baselines, 1.000 casos}\begin{tabular}{lrr}\toprule Método & F1 & AUC\\\midrule raridade\_transicoes & 0.625 & 0.836 \\
+local\_outlier\_factor & 0.450 & 0.812 \\
+isolation\_forest & 0.305 & 0.717 \\
+consenso\_ranks & 0.420 & 0.798 \\ \bottomrule\end{tabular}\end{table}
+O projeto também preserva um experimento anterior com quatro métodos de referência em 1.000 casos BPIC12, com 200 casos corrompidos artificialmente; suas métricas são mostradas separadamente. A tabela dos 14 métodos é construída com entradas cujo status é ok em results/bpic12-anomalias/summary.json. Métodos não concluídos não recebem valores substitutos. Nenhum desses números é atribuído ao artigo X-Processes.
+
+\begin{table}[t]\centering\caption{Resultados reais controlados; somente execuções concluídas}\begin{tabular}{lrrrr}\toprule
+Método & P & R & F1 & AUC\\\midrule
+likelihood & 0,395 & 0,395 & 0,395 & 0,759 \\
+naive & 0,255 & 0,255 & 0,255 & 0,664 \\
+sampling & 0,275 & 0,275 & 0,275 & 0,666 \\
+dae & 0,245 & 0,245 & 0,245 & 0,542 \\
+binetv3 & 0,360 & 0,360 & 0,360 & 0,700 \\
+binetv2 & 0,420 & 0,420 & 0,420 & 0,620 \\
+gama & 0,450 & 0,450 & 0,450 & 0,803 \\
+vae & 0,385 & 0,385 & 0,385 & 0,739 \\
+lae & 0,375 & 0,375 & 0,375 & 0,569 \\
+gae & 0,170 & 0,170 & 0,170 & 0,493 \\
+grasped & 0,305 & 0,305 & 0,305 & 0,652 \\
+leverage & 0,060 & 0,060 & 0,060 & 0,403 \\
+w2vlof & 0,465 & 0,465 & 0,465 & 0,757 \\
+vaeocsvm & 0,200 & 0,200 & 0,200 & 0,512 \\
+\bottomrule\end{tabular}\end{table}
+
+\begin{table}[t]\centering\caption{Estado dos 14 métodos disponibilizados}\begin{tabular}{ll}\toprule
+Método & Estado\\\midrule
+likelihood & ok \\
+naive & ok \\
+sampling & ok \\
+dae & ok \\
+binetv3 & ok \\
+binetv2 & ok \\
+gama & ok \\
+vae & ok \\
+lae & ok \\
+gae & ok \\
+grasped & ok \\
+leverage & ok \\
+w2vlof & ok \\
+vaeocsvm & ok \\
+\bottomrule\end{tabular}\end{table}
+
+\section{Leitura responsável dos resultados}
+Mesmo que todos os detectores executem, a proporção de alertas e a taxa de corrupção determinam parte das métricas observadas. Como a comparação utiliza apenas atividades e uma edição por caso, o teste não mede anomalias de recurso ou tempo. Um resultado de reparação é auditável consultando os arquivos de escores, casos e sugestões no mesmo diretório. Para comparar taxas de ruído, devem-se repetir execuções com sementes e parâmetros explícitos; somente então se pode calcular intervalos de variação.
+
+\clearpage
+\section{Falhas, limites e interpretação}
+Cada implementação legada é executada isoladamente. Se faltarem dependências ou houver incompatibilidades de versão, o método recebe status failed e erro em summary.json. A tabela abaixo registra as falhas desta execução, sem convertê-las em sucessos.
+\begin{itemize}
+\item Nenhuma falha registrada entre os métodos solicitados nesta etapa.
+\end{itemize}
+
+O X-Processes otimiza modelos descobertos, com foco em adequação, precisão, generalização e simplicidade \cite{fantinato2023xprocesses}. Essas medidas não são sinônimas de precisão, revocação e F1 de um detector de casos alterados. O log real pode conter comportamentos raros perfeitamente legítimos; sem validação de especialistas, o protocolo só estabelece capacidade de recuperar mudanças que ele mesmo introduziu. A amostra também não prova transferência de um método treinado sobre o modelo da professora para processos financeiros.
+
+\section{Reprodutibilidade}
+Este pacote mantém os logs em data/sintetico e data/real, sob um mesmo diretório de projeto. Execute executar\_sintetico.py para pontuar os 500 casos MXML ou executar\_real.py para os casos XES. Cada comando gera um resumo de métodos e recompila este relatório a partir dos resultados presentes. Confira rotulos.csv externo, escores por caso e status antes de usar as tabelas. O PDF depende de pdfLaTeX e BibTeX; o arquivo .tex é sempre escrito. Não é necessário instalar X-Processes para executar BPAD: a referência ao estudo identifica o conjunto real escolhido.
+
+\clearpage
+\section{Conclusão}
+O modelo da disciplina, iniciado no XML fornecido e executado no BIMP, permite avaliação controlada porque o log limpo foi preservado. Na amostra de 500 casos, raridade\_transicoes: F1 0,920. O BPIC12 fornece casos observacionais empregados também pelos pesquisadores de X-Processes; aqui uma cópia recebe alterações controladas para permitir medir detecção e estudar sugestões de reparo. A versão real contém 14 método(s) concluído(s) entre 14 solicitados; as tabelas descrevem apenas números gravados. Sem rótulos humanos de anomalias naturais, recomenda-se revisão humana e repetições com diferentes sementes e taxas.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}

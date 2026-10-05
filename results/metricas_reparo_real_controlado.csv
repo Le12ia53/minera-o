@@ -1,0 +1,5 @@
+﻿metodo,anomalous_cases,exactly_recovered,exact_recovery_rate,improved_cases,improvement_rate,worsened_cases,worsening_rate,mean_distance_before,mean_distance_after,normal_preservation_rate,prototipos_aprendidos,seed,noise_rate,alert_rate,sample_cases
+raridade_transicoes,200,78,0.39,78,0.39,1,0.005,1,0.615,0.99625,47,42,0.2,0.2,1000
+local_outlier_factor,200,27,0.135,27,0.135,1,0.005,1,0.87,0.99625,52,42,0.2,0.2,1000
+isolation_forest,200,1,0.005,1,0.005,0,0.0,1,0.995,1.0,58,42,0.2,0.2,1000
+consenso_ranks,200,11,0.055,11,0.055,1,0.005,1,0.95,0.99625,54,42,0.2,0.2,1000

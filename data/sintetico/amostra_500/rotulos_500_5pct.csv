@@ -1,0 +1,26 @@
+case_id,tipo,antes,depois
+1464,repeticao_A,A B C D E B C D E B C D E B C F I L G M H N J P K Q T V U X Y Z Z,A A B C D E B C D E B C D E B C F I L G M H N J P K Q T V U X Y Z Z
+1514,insercao_A_final,A B C F I L G M H N J P K Q R,A B C F I L G M H N J P K Q R A
+1858,insercao_A_final,A B C F I L G M H N J P K Q R S,A B C F I L G M H N J P K Q R S A
+2254,substituicao_A_por_Z,A B C F I L G M H N J P K Q R,Z B C F I L G M H N J P K Q R
+2953,repeticao_A,A B C F I L G O H P J K Q T W X Q R,A A B C F I L G O H P J K Q T W X Q R
+3178,substituicao_A_por_Z,A B C D E B C F I L G O H P J K Q T W X Y Z Z Z Z Z Z,Z B C D E B C F I L G O H P J K Q T W X Y Z Z Z Z Z Z
+3236,substituicao_A_por_Z,A B C D E B C D E B C D E B C F I L G M H N J P K Q T W X Q T W X Q R S,Z B C D E B C D E B C D E B C F I L G M H N J P K Q T W X Q T W X Q R S
+3273,insercao_A_final,A B C D E B C D E B C F I L G O H P J K Q R,A B C D E B C D E B C F I L G O H P J K Q R A
+3379,insercao_A_final,A B C F I L G O H P J K Q R S,A B C F I L G O H P J K Q R S A
+3433,repeticao_A,A B C D E B C F I L G O H P J K Q T W X Y Z,A A B C D E B C F I L G O H P J K Q T W X Y Z
+3468,omissao_A,A B C F I L G O H P J K Q R,B C F I L G O H P J K Q R
+3590,omissao_A,A B C F I L G O H P J K Q T V U X Q T W X Y Z,B C F I L G O H P J K Q T V U X Q T W X Y Z
+3715,substituicao_A_por_Z,A B C F I L G M H N J P K Q R S,Z B C F I L G M H N J P K Q R S
+3806,repeticao_A,A B C F I L G M H N J P K Q T V U X Y Z Z Z,A A B C F I L G M H N J P K Q T V U X Y Z Z Z
+4174,substituicao_A_por_Z,A B C D E B C F I L G O H P J K Q R,Z B C D E B C F I L G O H P J K Q R
+4250,substituicao_A_por_Z,A B C D E B C D E B C F I L G O H P J K Q T V U X Q R S,Z B C D E B C D E B C F I L G O H P J K Q T V U X Q R S
+4343,insercao_A_final,A B C D E B C D E B C F I L G M H N J P K Q T W X Q T W X Y Z,A B C D E B C D E B C F I L G M H N J P K Q T W X Q T W X Y Z A
+4358,repeticao_A,A B C D E B C F I L G O H P J K Q R S,A A B C D E B C F I L G O H P J K Q R S
+4363,insercao_A_final,A B C F I L G O H P J K Q T W X Q T V U X Y Z Z Z,A B C F I L G O H P J K Q T W X Q T V U X Y Z Z Z A
+4411,insercao_A_final,A B C D E B C F I L G M H N J P K Q T V U X Y Z,A B C D E B C F I L G M H N J P K Q T V U X Y Z A
+4715,insercao_A_final,A B C D E B C D E B C F I L G M H N J P K Q R S,A B C D E B C D E B C F I L G M H N J P K Q R S A
+4838,insercao_A_final,A B C F I L G M H N J P K Q T V U X Q R,A B C F I L G M H N J P K Q T V U X Q R A
+506,repeticao_A,A B C F I L G O H P J K Q R S,A A B C F I L G O H P J K Q R S
+559,repeticao_A,A B C D E B C F I L G M H N J P K Q R S,A A B C D E B C F I L G M H N J P K Q R S
+860,repeticao_A,A B C F I L G O H P J K Q R S,A A B C F I L G O H P J K Q R S

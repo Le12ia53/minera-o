@@ -1,0 +1,2 @@
+﻿dataset,cases,events,activities,variants,min_trace_length,max_trace_length,sample_cases,sample_anomalies,native_candidates_top_rate,top_rate,seed
+BPI Challenge 2012,13087,262200,24,4366,3,175,1000,200,654,0.05,42

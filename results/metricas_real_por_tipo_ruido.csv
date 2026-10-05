@@ -1,0 +1,17 @@
+﻿metodo,anomaly_type,total,detected,detection_recall,exactly_recovered,exact_recovery_rate
+raridade_transicoes,duplicate,50,25,0.5,14,0.28
+raridade_transicoes,missing,50,18,0.36,11,0.22
+raridade_transicoes,swap,50,32,0.64,27,0.54
+raridade_transicoes,unknown,50,50,1.0,26,0.52
+local_outlier_factor,duplicate,50,18,0.36,1,0.02
+local_outlier_factor,missing,50,10,0.2,0,0.0
+local_outlier_factor,swap,50,12,0.24,0,0.0
+local_outlier_factor,unknown,50,50,1.0,26,0.52
+isolation_forest,duplicate,50,13,0.26,0,0.0
+isolation_forest,missing,50,12,0.24,0,0.0
+isolation_forest,swap,50,15,0.3,0,0.0
+isolation_forest,unknown,50,21,0.42,1,0.02
+consenso_ranks,duplicate,50,18,0.36,1,0.02
+consenso_ranks,missing,50,13,0.26,0,0.0
+consenso_ranks,swap,50,14,0.28,0,0.0
+consenso_ranks,unknown,50,39,0.78,10,0.2

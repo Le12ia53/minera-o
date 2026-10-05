@@ -1,0 +1,12 @@
+-r requirements.txt
+pandas>=2,<3
+torch
+torch-geometric
+torchvision
+tensorflow
+keras
+gensim
+lxml
+untangle
+tqdm
+networkx

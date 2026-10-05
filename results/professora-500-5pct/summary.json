@@ -1,0 +1,19 @@
+[
+  {
+    "method": "raridade_transicoes",
+    "dataset": "professora-500-5pct",
+    "status": "ok",
+    "n_cases": 500,
+    "n_anomalies": 25,
+    "repairs_suggested": 17,
+    "precision": 0.92,
+    "recall": 0.92,
+    "f1": 0.92,
+    "average_precision": 0.9312812333864965,
+    "roc_auc": 0.9598315789473684,
+    "recall_insercao_A_final": 1.0,
+    "recall_omissao_A": 0.0,
+    "recall_repeticao_A": 1.0,
+    "recall_substituicao_A_por_Z": 1.0
+  }
+]
